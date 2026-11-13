@@ -10,8 +10,8 @@ source:
   sha256: ab455db0de007723cee44c86d37c2575747f158768289bf02e2791f3b1e006fd
 
 build:
-  number: 2
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv "
+  number: 3
+  script: "{{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vvv "
 
 requirements:
   build:
@@ -19,6 +19,7 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
   run:
     - python
     - six
@@ -26,16 +27,20 @@ requirements:
 test:
   imports:
     - workerpool
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
-  home: http://github.com/shazow/workerpool
+  home: https://github.com/shazow/workerpool
   license: MIT
+  license_family: MIT
   summary: Module for distributing jobs to a pool of worker threads
   description: |
     workerpool module facilitates distributing simple operations into jobs
     that are sent to worker threads, maintained by a pool object.
   doc_url: https://pypi.python.org/pypi/workerpool
-  doc_source_url: https://github.com/shazow/workerpool/blob/master/README.md
   dev_url: https://github.com/shazow/workerpool
 
 extra:
